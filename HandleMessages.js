@@ -19,6 +19,7 @@ class HandleMessage {
             response = {
                 "text": "Gracias por ponerte en contacto con nostros, te llamaremos mas tarde. (" + received_message.text + ")"
             }
+            this.callSendAPI(sender_psid, response);
         }
     }
 
