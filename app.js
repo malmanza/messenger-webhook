@@ -19,9 +19,9 @@ app.post('/webhook', (req, res) => {
   if (body.object === 'page') {
 
     let handler = new handlerMessage();
-
+    
     // Gets the body of the webhook event
-    let webhook_event = entry.messaging[0];
+    let webhook_event = body.entry[0].messaging[0];
     console.log(webhook_event);
 
 
