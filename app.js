@@ -20,24 +20,27 @@ app.post('/webhook', (req, res) => {
 
     let handler = new handlerMessage();
     
-    // Gets the body of the webhook event
-    let webhook_event = body.entry[0].messaging[0];
-    console.log(webhook_event);
+    body.entry.forEach(function(entry) {
 
-
-    // Get the sender PSID
-    let sender_psid = webhook_event.sender.id;
-    console.log('Sender PSID: ' + sender_psid);
-
-    // Check if the event is a message or postback and
-    // pass the event to the appropriate handler function
-    if (webhook_event.message) {
-      handler.handleMessage(sender_psid, webhook_event.message);
-    } else if (webhook_event.postback) {
-      handler.handlePostback(sender_psid, webhook_event.postback);
-    }
-
-    // Returns a '200 OK' response to all requests
+      // Gets the body of the webhook event
+      let webhook_event = entry.messaging[0];
+      console.log(webhook_event);
+    
+    
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender PSID: ' + sender_psid);
+    
+      // Check if the event is a message or postback and
+      // pass the event to the appropriate handler function
+      if (webhook_event.message) {
+        handler.handleMessage(sender_psid, webhook_event.message);        
+      } else if (webhook_event.postback) {
+        handler.handlePostback(sender_psid, webhook_event.postback);
+      }
+      
+    });
+    // Return a '200 OK' response to all events
     res.status(200).send('EVENT_RECEIVED');
   } else {
     // Returns a '404 Not Found' if event is not from a page subscription
