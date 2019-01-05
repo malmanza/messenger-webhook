@@ -20,13 +20,14 @@ class HandleMessage {
                 "text": "Gracias por ponerte en contacto con nostros, te llamaremos mas tarde. (" + received_message.text + ")"
             }
         }
-        console.info('Es un mensaje de texto');
+        console.info('Es un mensaje de textogit s');
         this.callSendAPI(sender_psid, response);
     }
 
     // Handles messaging_postbacks events
     handlePostback(sender_psid, received_postback) {
         let postback = received_postback.payload;
+        let response;
         response = {
             "text": postback
         }
