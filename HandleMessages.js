@@ -20,12 +20,18 @@ class HandleMessage {
                 "text": "Gracias por ponerte en contacto con nostros, te llamaremos mas tarde. (" + received_message.text + ")"
             }
         }
+        console.info('Es un mensaje de texto');
         this.callSendAPI(sender_psid, response);
     }
 
     // Handles messaging_postbacks events
     handlePostback(sender_psid, received_postback) {
-
+        let postback = received_postback.payload;
+        response = {
+            "text": postback
+        }
+        console.info('Es un mensaje postback');
+        this.callSendAPI(sender_psid, response);
     }
 
     // Sends response messages via the Send API
